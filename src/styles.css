@@ -1,0 +1,13 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.ReactCrop__drag-elements div {
+  opacity: 0;
+}
+
+.ReactCrop__crop-selection {
+  border: none !important;
+  border-image-source: none !important;
+}
