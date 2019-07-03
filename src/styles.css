@@ -11,3 +11,7 @@
   border: none !important;
   border-image-source: none !important;
 }
+
+img {
+  border: 1px solid green;
+}

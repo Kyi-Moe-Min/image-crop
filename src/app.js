@@ -3,19 +3,21 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
 export default class extends React.Component {
+  image = null;
+  heightRatio = 1;
+  widthRatio = 1;
   state = {
     src: null,
     crop: {
       aspect: 1,
       unit: "%",
-      x: 25,
+      x: 0,
       y: 0,
-      width: 100
+      width: 50,
+      height: 50
     },
     croppedImage: null
   };
-
-  image = null;
 
   onChangeFile = e => {
     let reader = new FileReader();
@@ -26,20 +28,48 @@ export default class extends React.Component {
   };
 
   save = () => {
-    this.setState({ src: this.getCroppedImage() });
+    this.setState({ croppedImage: this.drawImage() });
   };
 
-  getCroppedImage = () => {
+  createCanvas = () => {
     const {
-      crop: { x, y, width, height }
+      crop: { width, height }
     } = this.state;
-    console.log(height, width);
-    let canvas = document.createElement("canvas");
-    canvas.height = height;
-    canvas.width = width;
-    let ctx = canvas.getContext("2d");
-    ctx.drawImage(this.image, x, y, width, height, 0, 0, width, height);
-    return canvas.toDataURL("png");
+    const {
+      clientWidth,
+      clientHeight,
+      naturalWidth,
+      naturalHeight
+    } = this.image;
+    this.heightRatio = naturalHeight / clientHeight;
+    this.widthRatio = naturalWidth / clientWidth;
+    let c = document.createElement("canvas");
+    c.height = height * this.heightRatio;
+    c.width = width * this.widthRatio;
+    return c;
+  };
+
+  drawImage = () => {
+    let c = this.createCanvas();
+    let ctx = c.getContext("2d");
+    const { image, state, widthRatio, heightRatio } = this;
+    let {
+      crop: { x, y, width, height }
+    } = state;
+    let resultHeight = height * heightRatio;
+    let resultWidth = width * widthRatio;
+    ctx.drawImage(
+      image,
+      x * widthRatio,
+      y * heightRatio,
+      resultWidth,
+      resultHeight,
+      0,
+      0,
+      resultWidth,
+      resultHeight
+    );
+    return c.toDataURL("png");
   };
 
   render() {
@@ -54,11 +84,11 @@ export default class extends React.Component {
             console.dir(image);
             this.image = image;
           }}
-          onComplete={crop => console.log(crop)}
+          onComplete={this.save}
           onChange={crop => this.setState({ crop })}
         />
-        <img src={this.state.src} height="100" alt="hell" />
-        <input type="button" onClick={this.save} value="Save" />
+        <img src={this.state.croppedImage} height="300" alt="hell" />
+        {/* <input type="button" onClick={this.save} value="Save" /> */}
       </div>
     );
   }
