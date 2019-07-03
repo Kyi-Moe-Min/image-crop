@@ -84,8 +84,8 @@ export default class extends React.Component {
             console.dir(image);
             this.image = image;
           }}
-          onComplete={this.save}
-          onChange={crop => this.setState({ crop })}
+          // onComplete={this.save}
+          onChange={crop => this.setState({ crop }, this.save)}
         />
         <img src={this.state.croppedImage} height="300" alt="hell" />
         {/* <input type="button" onClick={this.save} value="Save" /> */}
