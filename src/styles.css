@@ -4,7 +4,8 @@
 }
 
 .ReactCrop__drag-elements div {
-  opacity: 0;
+  /* opacity: 0; */
+  border-style: solid;
 }
 
 .ReactCrop__crop-selection {
@@ -12,6 +13,72 @@
   border-image-source: none !important;
 }
 
-img {
-  border: 1px solid green;
+.ReactCrop .ord-nw,
+.ReactCrop .ord-ne,
+.ReactCrop .ord-sw,
+.ReactCrop .ord-se {
+  background-color: transparent;
+}
+
+.ReactCrop .ord-nw {
+  margin-top: -2px !important;
+  margin-left: -2px !important;
+  border-width: 2px 0 0 2px;
+  border-color: #fff8 transparent transparent #fff8 !important;
+}
+.ReactCrop .ord-ne {
+  margin-top: -2px !important;
+  margin-right: -2px !important;
+  border-width: 2px 2px 0 0;
+  border-color: #fff8 #fff8 transparent transparent !important;
+}
+.ReactCrop .ord-se {
+  margin-bottom: -2px !important;
+  margin-right: -2px !important;
+  border-width: 0 2px 2px 0;
+  border-color: transparent #fff8 #fff8 transparent;
+}
+.ReactCrop .ord-sw {
+  margin-bottom: -2px !important;
+  margin-left: -2px !important;
+  border-width: 0 0 2px 2px;
+  border-color: transparent transparent #fff8 #fff8;
+}
+
+.cropper {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  top: 50px;
+  box-shadow: 0px 0px 0px 999rem #0002;
+  padding: 10px;
+  background-color: #fff;
+  z-index: 9;
+}
+
+@media (pointer: coarse) {
+  .ReactCrop .ord-nw {
+    margin-top: -2px !important;
+    margin-left: -2px !important;
+    border-width: 2px 0 0 2px;
+    border-color: #fff8 transparent transparent #fff8 !important;
+  }
+  .ReactCrop .ord-ne {
+    margin-top: -2px !important;
+    margin-right: -2px !important;
+    border-width: 2px 2px 0 0;
+    border-color: #fff8 #fff8 transparent transparent !important;
+  }
+  .ReactCrop .ord-se {
+    margin-bottom: -2px !important;
+    margin-right: -2px !important;
+    border-width: 0 2px 2px 0;
+    border-color: transparent #fff8 #fff8 transparent;
+  }
+  .ReactCrop .ord-sw {
+    margin-bottom: -2px !important;
+    margin-left: -2px !important;
+    border-width: 0 0 2px 2px;
+    border-color: transparent transparent #fff8 #fff8;
+  }
 }
