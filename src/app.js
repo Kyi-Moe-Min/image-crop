@@ -69,7 +69,7 @@ export default class extends React.Component {
       resultWidth,
       resultHeight
     );
-    return c.toDataURL("png");
+    return c.toDataURL("image/jpeg", 1.0);
   };
 
   render() {
@@ -87,7 +87,7 @@ export default class extends React.Component {
           // onComplete={this.save}
           onChange={crop => this.setState({ crop }, this.save)}
         />
-        <img src={this.state.croppedImage} height="300" alt="hell" />
+        <img src={this.state.croppedImage} height="250" alt="hell" />
         {/* <input type="button" onClick={this.save} value="Save" /> */}
       </div>
     );
